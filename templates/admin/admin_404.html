@@ -1,0 +1,26 @@
+{% extends 'admin/admin_base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="{{ static('admin/css/404.css') }}">
+{% endblock %}
+
+{% block title %}
+哎呀！页面走丢啦！
+{% endblock %}
+
+
+{% block main %}
+
+<div class="bg-404">
+	<div class="main">
+		<div class="aiya">哎呀！页面走丢啦！</div>
+		<button class="back" onclick="window.history.back()">返回上一页</button>
+		<ul class="link_grp">
+			<li><a href="{{ url_for('admin.index') }}">返回首页</a></li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block bottom %}
+
+{% endblock %}

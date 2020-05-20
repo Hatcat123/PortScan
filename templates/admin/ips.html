@@ -1,0 +1,66 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block head %}
+
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="{{ static('admin/js/ips.js') }}"></script>
+
+{% endblock %}
+
+{% block title %}
+	资产管理
+{% endblock %}
+
+
+{% block page_title %}
+	{{ self.title() }}
+{% endblock %}
+
+{% block main %}
+
+		<legend>{{ self.title() }}</legend>
+
+
+
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+                    <button class="layui-btn layui-btn-sm" lay-event="addIPS">添加资产</button>
+                </div>
+            </script>
+
+            <script type="text/html" id="barDemo">
+
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i
+                        class="layui-icon layui-icon-delete"></i>删除</a>
+
+            </script>
+        </div>
+
+
+{% endblock %}
+{% block layer %}
+
+    <form class="layui-form" action="" lay-filter="example" id="add" style="display: none">
+        <div class="layui-form-item" style="margin-top: 20px">
+            <label class="layui-form-label">待扫描ip</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ips" lay-verify="required" autocomplete="off" placeholder="请输入ip:127.0.0.1或者 192.168.1.1-192.168.1.100网段:127.0.0.1/24"
+                       class="layui-input" style="width:  600px">
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="add" id="hello">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-sm">重置</button>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
+

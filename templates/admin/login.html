@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% from 'common/_macros.html' import static %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>端口扫描指纹管理系统</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<script src="{{ static('common/jquery.min.js') }}"></script>
+
+	{% include 'common/_head.html' %}
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href={{ url_for('static', filename='admin/font/style.css') }} type="text/css" rel="stylesheet">
+	<script src="{{ static('common/zlparam.js') }}"></script>
+	<script src="{{ static('admin/js/login.js') }}"></script>
+	<link rel="stylesheet" href="{{ static('admin/css/login.css') }}">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+
+<body style="background:url(/static/admin/img/mountains_light_sun_sky_clouds_114136_2560x1080.jpg) no-repeat;"
+      id="top-image">
+
+<div class="container wrap1" style="height:450px;">
+	<h2 class="mg-b20 text-center">端口扫描指纹管理系统</h2>
+	<div class="col-sm-8 col-md-5 center-auto pd-sm-50 pd-xs-20 main_content">
+		<p class="text-center font16">管理员登录</p>
+		<form>
+			<div class="form-group mg-t20">
+				<i class="icon-user icon_font"></i>
+				<input type="text" class="login_input" id="Email1" placeholder="请输入邮箱或者用户名" name="email"/>
+			</div>
+			<div class="form-group mg-t20">
+				<i class="icon-lock icon_font"></i>
+				<input type="password" class="login_input" id="Password" placeholder="请输入密码" name="password"/>
+			</div>
+
+			<div class="checkbox mg-b25">
+				<label>
+					<input type="checkbox" value="1" name="remember"/>记住我的登录信息
+				</label>
+			</div>
+			<button class="login_btn">登 录</button>
+		</form>
+		{% if message %}
+			{#            <p style="text-align: center" class="text-danger">{{ message }}</p>#}
+			<script type="text/javascript">
+                zlalert.alertInfoToast('{{ message }}')
+			</script>
+		{% endif %}
+	</div><!--row end-->
+</div><!--container end-->
+</body>
+</html>

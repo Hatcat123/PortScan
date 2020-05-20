@@ -1,0 +1,129 @@
+{% extends 'admin/admin_base.html' %}
+{% from 'common/_macros.html' import static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ static('admin/css/bootstrap.min.css') }}" media="all">
+    <link rel="stylesheet" href="{{ static('admin/css/global.css') }}" media="all">
+    <link rel="stylesheet" href="{{ static('admin/css/admin_index.css') }}" media="all">
+    <link rel="stylesheet" href="{{ static('admin/css/common.css') }}" media="all">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_bmgv5kod196q1tt9.css" media="all">
+    <script type="text/javascript" src="{{ static('common/echarts.min.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+    首页
+{% endblock %}
+
+
+{% block main %}
+    <div class="larry-grid larry-wrapper">
+        <div class="row" id="infoSwitch">
+            <blockquote class="layui-elem-quote col-md-12 head-con">
+                <div>尊敬的{{ g.user.username }}<span id="weather"></span></div>
+                <i class="larry-icon larry-guanbi close" id="closeInfo"></i>
+            </blockquote>
+        </div>
+        <div class="row shortcut" id="shortcut">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 ">
+                <section class="panel clearfix">
+                    <div class="symbol shortcut-bg1"><i class="larry-icon larry-daishenhe1"
+                                                        data-icon="larry-daishenhe1"></i></div>
+                    <div class="value">
+                        <a data-href="html/temp.html">
+                            <h1 id="wechat_article_num">
+                                <a href="{{ url_for('admin.ips') }}">{{ ips_num }}</a>
+                            </h1>
+                        </a>
+                        <p>资产数量</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 ">
+                <section class="panel">
+                    <div class="symbol shortcut-bg2"><i class="larry-icon larry-renwuguanli"
+                                                        data-icon="larry-fabu2"></i>
+                    </div>
+                    <div class="value">
+                        <a data-href="html/temp.html">
+                            <h1 id="t_account_num">
+                                <a href="#">  {{ monitor_ips_num }}</a>
+                            </h1>
+                        </a>
+                        <p>监控资产数量</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 ">
+                <section class="panel">
+                    <div class="symbol shortcut-bg3"><i class="larry-icon larry-lanmuguanli"
+                                                        data-icon="larry-lanmuguanli"></i></div>
+                    <div class="value">
+                        <a data-href="html/temp.html">
+                            <h1 id="account_num">
+                                <a href="{{ url_for("admin.livingip") }}">{{ ip_num }}</a>
+                            </h1>
+                        </a>
+                        <p>ip资产数量</p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 ">
+                <section class="panel">
+                    <div class="symbol shortcut-bg5"><i class="larry-icon larry-kehuliebiao"
+                                                        data-icon="larry-kehuliebiao"></i></div>
+                    <div class="value">
+                        <a data-href="html/temp.html">
+                            <h1 id="t_account_start_num">
+                                <a href="{{ url_for('admin.iport') }}">{{ port_num }}</a>
+                            </h1>
+                        </a>
+                        <p>端口数量</p>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+
+
+        <!-- 个人信息 -->
+        <div class="row system">
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+
+                <section class="panel">
+                    <header class="panel-heading bm0">
+                        <span class='span-title'>数据统计</span>
+                        <span class="tools pull-right"><a href="javascript:;" class="iconpx-chevron-down"></a></span>
+                    </header>
+                    <div class="panel-body larry-seo-box">
+                        <div class="layui-carousel" id="test1" lay-filter="test1">
+                            <div carousel-item>
+                                <div id="bar1"
+                                     style="background-image: url('{{ static('admin/img/timg.gif') }}');"></div>
+                                <div id="bar2"
+                                     style="background-image: url('{{ static('admin/img/timg.gif') }}'); height: 304px; width: 805px"></div>
+{#                                <div id="bar3"#}
+{#                                     style="background-image: url('{{ static('admin/img/timg.gif') }} ');height: 304px; width: 805px"></div>#}
+{#                                <div id="bar4"#}
+{#                                     style="background-image: url('{{ static('admin/img/timg.gif') }} ');height: 304px; width: 805px"></div>#}
+{#                                <div id="bar5"#}
+{#                                     style="height: 304px; width: 805px"><img#}
+{#                                        src="{{ url_for('static', filename='front/img/dream.png') }}" alt=""></div>#}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{{ static('common/jquery.leoweather.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static('admin/js/admin_index.js') }}"></script>
+{% endblock %}
+
+{% block bottom %}
+{% endblock %}
+

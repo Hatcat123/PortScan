@@ -1,0 +1,66 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block head %}
+
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="{{ static('admin/js/livingip.js') }}"></script>
+
+{% endblock %}
+
+{% block title %}
+	资产信息
+{% endblock %}
+
+
+{% block page_title %}
+	{{ self.title() }}
+{% endblock %}
+
+{% block main %}
+
+<legend>{{ self.title() }}</legend>
+
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <a class="layui-btn" lay-submit="" lay-filter="demo2" id="back"
+                   href="{{ url_for('admin.livingip') }}">
+                    <i class="layui-icon layui-icon-return"></i>
+                </a>
+                		<div class="layui-inline" style="margin-top: 5px">
+				<label class="layui-form-label">IP</label>
+				<div class="layui-input-inline">
+					<input type="text" name="ip" placeholder="请输入ip查询" autocomplete="off" class="layui-input"
+					       id="ip">
+				</div>
+			</div>
+                           <div class="layui-inline" style="margin-top: 5px">
+                    <label class="layui-form-label">全部ip</label>
+                    <div class="layui-input-inline">
+                        <select name="label" id="all">
+                            <option value="">请选择标签</option>
+                            <option value="1">全部ip</option>
+                            <option value="0">开放ip</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo2" id="submit">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                </div>
+
+            </div>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+        </div>
+
+
+{% endblock %}
+{% block layer %}
+
+
+{% endblock %}
+

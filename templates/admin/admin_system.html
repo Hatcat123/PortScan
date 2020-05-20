@@ -1,0 +1,163 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block head %}
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ static('admin/js/system.js') }}"></script>
+
+
+{% endblock %}
+
+{% block title %}
+    系统设置
+{% endblock %}
+
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block main %}
+    <fieldset class="layui-elem-field">
+        <legend>系统配置</legend>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+
+                        <div class="layui-card-body" pad15>
+
+                            <form class="layui-form" wid100 lay-filter="" action="" method="post">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">网站名称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="sitename" value="端口指纹扫描系统（毕设名字）" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">扫描引擎</label>
+                                    <div class="layui-input-block">
+                                      {% if system.engine %}
+                                          <i class="layui-icon layui-icon-heart" style="font-size: 30px; color: #1E9FFF;"></i>运行
+                                      {% else %}
+                                          <i class="layui-icon layui-icon" style="font-size: 30px; color: #1E9FFF;"></i>暂停
+                                      {% endif %}
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">扫描时间</label>
+                                    <div class="layui-input-inline" style="width:150px;">
+                                        <input type="text" name="loop_time"
+                                               value="{{ system.loop_time }}" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">秒</div>
+                                    <div class="layui-form-mid layui-word-aux">采集周期为每天几点采集。24小时制。如`18 * 60 *
+                                        60`每天18:00开始采集
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">循环周期</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <input type="text" name="cycle_time"
+                                               value="{{ system.cycle_time }}" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">秒</div>
+                                    <div class="layui-form-mid layui-word-aux">循环周期。如12*60*60 每12个小时采集一次</div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">监测周期</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <input type="text" name="sleep_time"
+                                               value="{{ system.sleep_time }}" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">秒</div>
+                                    <div class="layui-form-mid layui-word-aux">监测周期。如1*60 每1分钟检测是否有新任务</div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">ip存活探测</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <select name="living_model" lay-verify="">
+                                            <option value="{{ system.living_model }}">{{ system.living_model }}</option>
+                                            <option value="ping">ping</option>
+                                            <option value="icmp">icmp</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">模式</div>
+                                    <div class="layui-form-mid layui-word-aux">建议icmp探测</div>
+
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">端口开放</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <select name="port_model" lay-verify="">
+                                            <option value="{{ system.port_model }}">{{ system.port_model }}</option>
+                                            <option value="socket-all">socket-all</option>
+                                            <option value="socket-vul">socket-vul</option>
+                                            <option value="masscan-all">masscan-all</option>
+                                            <option value="masscan-vul">masscan-all</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">模式</div>
+                                    <div class="layui-form-mid layui-word-aux">建议socket脆弱端口探测</div>
+
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">指纹信息</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <select name="finger_model" lay-verify="">
+                                            <option value="{{ system.finger_model }}">{{ system.finger_model }}</option>
+                                            <option value="nmap">nmap</option>
+                                            <option value="version-all">version-all</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">模式</div>
+                                    <div class="layui-form-mid layui-word-aux">version-all重量级探测 nmap普通探测</div>
+
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">扫描线程</label>
+                                    <div class="layui-input-inline" style="width: 150px;">
+                                        <input type="text" name="thread" value="{{ system.thread }}" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">个</div>
+                                    <div class="layui-form-mid layui-word-aux">建议1000</div>
+
+                                </div>
+
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">脆弱端口</label>
+                                    <div class="layui-input-block">
+                                        <textarea name="vul_port"
+                                                  class="layui-textarea">{{ system.vul_port }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit lay-filter="set_website">确认修改</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+
+
+{% endblock %}
+
+
+
+
+
+
