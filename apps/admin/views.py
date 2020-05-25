@@ -285,6 +285,7 @@ class SystemView(views.MethodView):
         else:
             engine = False
         system = {
+            "create_time": config.create_time,
             "loop_time": config.loop_time,
             "cycle_time": config.cycle_time,
             "sleep_time": config.sleep_time,

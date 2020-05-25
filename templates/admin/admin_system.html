@@ -45,6 +45,19 @@
                                       {% endif %}
                                     </div>
                                 </div>
+                                {% if system.engine %}
+                                           <div class="layui-form-item">
+                                    <label class="layui-form-label">本次扫描</label>
+                                    <div class="layui-input-inline" style="width:150px;">
+                                        <input type="text" name="create_time"
+                                               value="{{ system.create_time }}" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline layui-input-company">时间</div>
+                                    <div class="layui-form-mid layui-word-aux">本次扫描时间，根据周期可算出下次扫描时间
+                                    </div>
+                                </div>
+                                      {% endif %}
+
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">扫描时间</label>
                                     <div class="layui-input-inline" style="width:150px;">
@@ -82,6 +95,7 @@
                                             <option value="{{ system.living_model }}">{{ system.living_model }}</option>
                                             <option value="ping">ping</option>
                                             <option value="icmp">icmp</option>
+                                            <option value="arp">arp</option>
 
                                         </select>
                                     </div>

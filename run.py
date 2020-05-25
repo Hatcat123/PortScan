@@ -84,7 +84,7 @@ def port_scan(model):
         if model == 'socket-all':
             sa = socket_all.SocketAll()
             try:
-                living_port = sa.run(ip=ip_obj.ip)
+                living_port = sa.run(ip=ip_obj.ip,thread=conf.thread)
             except:
                 living_port = []
         elif model == 'socket-vul':
@@ -122,7 +122,7 @@ def living_scan(model):
     :return:
     '''
     print('[+] 开始探测ip存活，模式{}'.format(model))
-    from scan_tools.lib import icmp, alive
+    from scan_tools.lib import icmp, alive,arp_scan
     '''
     获取到数据库所有的ip列表
     '''
@@ -157,6 +157,24 @@ def living_scan(model):
                 living_ip.scan_time = datetime.now()
                 if i.ip in living_ip_dict:
                     living_ip.flag = '1' # 存活的ip标志为1
+                else:
+                    living_ip.flag = '0'
+            session.commit()
+    elif model=='arp':
+        ipPool = []
+        for ip in ip_list:
+            ipPool.append(ip.ip)
+        _as =arp_scan.ArpScan()
+        living_ip_dict =_as.run(ipPool)
+        if living_ip_dict:
+            for i in ip_list:
+                '''
+                查询ip库中的ip=ip
+                '''
+                living_ip = session.query(LivingIP).filter(LivingIP.ip == i.ip).first()
+                living_ip.scan_time = datetime.now()
+                if i.ip in living_ip_dict:
+                    living_ip.flag = '1'  # 存活的ip标志为1
                 else:
                     living_ip.flag = '0'
             session.commit()
@@ -262,7 +280,7 @@ import threading
 
 def engine_living():
     while 1:
-        print('引擎活着')
+        # print('引擎活着')
         conf = session2.query(Config).first()
         conf.engine = datetime.now()
         session2.commit()
