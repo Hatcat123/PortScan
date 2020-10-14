@@ -93,3 +93,4 @@ python app.py
 
 登录后台配置扫描环境
 
+# [update] ignore /bin
