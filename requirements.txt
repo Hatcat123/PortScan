@@ -8,7 +8,7 @@ ipaddr==2.2.0
 IPy==1.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
-Mako==1.1.2
+Mako==1.2.2
 MarkupSafe==1.1.1
 prettytable==0.7.2
 pyecharts==1.7.1
